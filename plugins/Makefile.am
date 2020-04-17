@@ -10,6 +10,7 @@ DIST_SUBDIRS =		\
 	sort 		\
 	spell 		\
 	taglist 	\
+	functionlist 	\
 	time		\
 	trailsave
 
@@ -24,6 +25,7 @@ SUBDIRS = 		\
 	snippets	\
 	sort		\
 	taglist		\
+	functionlist 	\
 	time		\
 	trailsave
 

@@ -1,0 +1,8 @@
+[Plugin]
+Module=functionlist
+IAge=2
+Name=Function list
+Description=Provides a method to easily insert commonly used tags/strings into a document without having to type them.
+Authors=Konstantin Unruh
+Copyright=Copyright © 2020 Konstantin Unruh
+Website=https://mate-desktop.org
