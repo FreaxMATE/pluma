@@ -11,10 +11,10 @@ AM_CPPFLAGS = 							\
 plugin_LTLIBRARIES = libfunctionlist.la
 
 libfunctionlist_la_SOURCES = \
-	pluma-functionlist-plugin-view.c	\
-	pluma-functionlist-plugin-view.h	\
-	pluma-functionlist-plugin-list.c	\
-	pluma-functionlist-plugin-list.h	\
+	pluma-functionlist-view.c	\
+	pluma-functionlist-view.h	\
+	pluma-functionlist-list.c	\
+	pluma-functionlist-list.h	\
 	pluma-functionlist-plugin.c		\
 	pluma-functionlist-plugin.h
 

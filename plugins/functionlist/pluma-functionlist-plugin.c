@@ -24,8 +24,8 @@
 #endif
 
 #include "pluma-functionlist-plugin.h"
-#include "pluma-functionlist-plugin-list.h"
-#include "pluma-functionlist-plugin-view.h"
+#include "pluma-functionlist-list.h"
+#include "pluma-functionlist-view.h"
 
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
@@ -38,8 +38,8 @@ struct _PlumaFunctionlistPluginPrivate
 {
    GtkWidget *window;
 
-   PlumaFunctionlistPluginView *functionlist_panel;
-   PlumaFunctionlistPluginList *functionlist_store;
+   PlumaFunctionlistView *functionlist_panel;
+   PlumaFunctionlistList *functionlist_store;
 };
 
 static void peas_activatable_iface_init (PeasActivatableInterface *iface);
@@ -51,8 +51,8 @@ G_DEFINE_DYNAMIC_TYPE_EXTENDED (PlumaFunctionlistPlugin,
                                 G_ADD_PRIVATE_DYNAMIC (PlumaFunctionlistPlugin)
                                 G_IMPLEMENT_INTERFACE_DYNAMIC (PEAS_TYPE_ACTIVATABLE,
                                                                peas_activatable_iface_init) \
-                                                                                            \
-                                _pluma_functionlist_plugin_list_register_type (type_module);    \
+                                _pluma_functionlist_view_register_type (type_module);   \
+                                _pluma_functionlist_list_register_type (type_module);   \
 )
 
 enum {
@@ -64,16 +64,12 @@ static void
 pluma_functionlist_plugin_init (PlumaFunctionlistPlugin *plugin)
 {
    plugin->priv = pluma_functionlist_plugin_get_instance_private (plugin);
-
-   pluma_debug_message (DEBUG_PLUGINS, "PlumaFunctionlistPlugin initializing");
 }
 
 static void
 pluma_functionlist_plugin_dispose (GObject *object)
 {
    PlumaFunctionlistPlugin *plugin = PLUMA_FUNCTIONLIST_PLUGIN (object);
-
-   pluma_debug_message (DEBUG_PLUGINS, "PlumaFunctionlistPlugin disposing");
 
    if (plugin->priv->window != NULL)
    {
@@ -88,8 +84,6 @@ static void
 pluma_functionlist_plugin_finalize (GObject *object)
 {
    pluma_debug_message (DEBUG_PLUGINS, "PlumaFunctionlistPlugin finalizing");
-
-  // free_functionlist ();
 
    G_OBJECT_CLASS (pluma_functionlist_plugin_parent_class)->finalize (object);
 }
@@ -108,10 +102,10 @@ pluma_functionlist_plugin_activate (PeasActivatable *activatable)
    window = PLUMA_WINDOW (priv->window);
    side_panel = pluma_window_get_side_panel (window);
 
-   priv->functionlist_store = pluma_functionlist_plugin_list_new (priv->functionlist_panel);
+   priv->functionlist_store = pluma_functionlist_list_new (window);
 
    data_dir = peas_extension_base_get_data_dir (PEAS_EXTENSION_BASE (activatable));
-   priv->functionlist_panel = pluma_functionlist_plugin_view_new (window, data_dir);
+   priv->functionlist_panel = pluma_functionlist_view_new (window);
    g_free (data_dir);
 
    pluma_panel_add_item_with_icon (side_panel,
@@ -224,10 +218,10 @@ peas_activatable_iface_init (PeasActivatableInterface *iface)
 G_MODULE_EXPORT void
 peas_register_types (PeasObjectModule *module)
 {
-   pluma_functionlist_plugin_register_type (G_TYPE_MODULE (module));
+	pluma_functionlist_plugin_register_type (G_TYPE_MODULE (module));
 
-   peas_object_module_register_extension_type (module,
-                                               PEAS_TYPE_ACTIVATABLE,
-                                               PLUMA_TYPE_FUNCTIONLIST_PLUGIN);
+	peas_object_module_register_extension_type (module,
+	                                            PEAS_TYPE_ACTIVATABLE,
+	                                            PLUMA_TYPE_FUNCTIONLIST_PLUGIN);
 }
 
