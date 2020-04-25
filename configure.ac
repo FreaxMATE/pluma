@@ -167,14 +167,15 @@ PKG_CHECK_MODULES(PLUMA, [
 	gio-2.0 >= 2.50.0
 	gtk+-3.0 >= $GTK_REQUIRED
 	gtksourceview-3.0 >= $GTKSOURCEVIEW_REQUIRED
+	vte-2.91 >= 0.20.0
 	libpeas-1.0 >= 1.2.0
 	libpeas-gtk-1.0 >= 1.2.0
 ])
 
 PKG_CHECK_MODULES(X11, [x11])
 
-PLUMA_CFLAGS="$PLUMA_CFLAGS $X11_CFLAGS"
-PLUMA_LIBS="$PLUMA_LIBS $X11_LIBS"
+PLUMA_CFLAGS="$PLUMA_CFLAGS $X11_CFLAGS $vte_CFLAGS"
+PLUMA_LIBS="$PLUMA_LIBS $vte_CFLAGS $X11_LIBS"
 
 AC_SUBST(PLUMA_CFLAGS)
 AC_SUBST(PLUMA_LIBS)
@@ -263,6 +264,7 @@ plugins/snippets/snippets/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/spell/org.mate.pluma.plugins.spell.gschema.xml
+plugins/terminal/Makefile
 plugins/taglist/Makefile
 plugins/time/Makefile
 plugins/time/org.mate.pluma.plugins.time.gschema.xml

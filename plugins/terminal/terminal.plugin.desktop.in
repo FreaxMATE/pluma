@@ -1,0 +1,8 @@
+[Plugin]
+Module=terminal
+IAge=2
+Name=Terminal
+Description=Terminal in the bottom pane
+Authors=Konstantin Unruh
+Copyright=Copyright © 2020 Konstantin Unruh
+Website=https://mate-desktop.org
